@@ -1,0 +1,29 @@
+name: 'Example workflow'
+on:
+  workflow_dispatch:
+jobs:
+  red_or_blue_pill:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        world:
+          - {
+            name: 'Machine',
+            creator: 'The Architect'
+          }
+          - {
+            name: 'Real',
+            creator: 'Depends who made the biggest bang xD'
+          }
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Info dump'
+        run: echo "${{ toJson(matrix.world) }}"
+
+      - name: "World name"
+        run: echo "${{ matrix.world.name }}"
+
+      - name: "World creator"
+        run: echo "${{ matrix.world.creator }}"
